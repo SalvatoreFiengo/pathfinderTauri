@@ -1,27 +1,29 @@
-import { useState, useEffect } from "react";
-import { listen } from '@tauri-apps/api/event';
-import { invoke } from '@tauri-apps/api'
+import { FirebaseApp, initializeApp } from 'firebase/app';
+
+// TODO: Replace the following with your app's Firebase project configuration
 
 function App() {
-  const [data, setData] = useState<any>([]);
-
-  useEffect(() => {
-    listen('data', data => {
-      setData(data);
-    });
-    invoke('get_data');
-  }, []);
+  const firebaseConfig = {
+    apiKey: import.meta.env.VITE_FIREB_APIKEY,
+    authDomain: import.meta.env.VITE_authDomain,
+    projectId: import.meta.env.VITE_projectId,
+    storageBucket: import.meta.env.VITE_storageBucket,
+    messagingSenderId: import.meta.env.VITE_messagingSenderId,
+    appId: import.meta.env.VITE_appId,
+    measurementId: import.meta.env.VITE_measurementId
+  };
+  
+  // const firebase = initializeApp(firebaseConfig);
+  // const db = getFirestore(firebase);
 
   return (
     <div>
-      <h1>API data:</h1>
-      <ul>
-        {data.map((item: any) => (
-          <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
+      <h1>Welcome</h1>
+
+
     </div>
   );
 }
 
 export default App;
+
