@@ -1,21 +1,19 @@
-ul {
-  list-style: none !important;
-  list-style-position: inside !important;
-  margin: 8px 16px 8px 16px;  
-  padding-left: 0;
+@font-face {
+  font-family: 'Roboto';
+  src: url('roboto.eot'); /* IE9 Compat Modes */
+  src: url('roboto.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('roboto.woff') format('woff'), /* Modern Browsers */
+  url('roboto.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url('roboto.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
-
-li {
-  margin-left: 0;
-  padding-left: 0;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
-}
-
-.flex-row {
-  display: flex;
+.backgroundImage {
+  position: fixed;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: url("../../assets/background.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-size: 100% 100%;
 }

@@ -9,8 +9,23 @@ export type Action = {
   traits: string[];
   type: string;
 }
+
+export type Deities = {
+  id: string;
+  description: string;
+  name: string
+}
+
+export type Traits = {
+  id: string;
+  description: string;
+  isHidden: number;
+  isImportant: number;
+  name: string;
+}
+
 export type Rules = {
-  actions: Action[];
-  deities: any[];
-  traits: any[];
+  actions?: Action[];
+  deities?: Deities[];
+  traits?: Traits[];
 }
