@@ -28,7 +28,6 @@ import SportsKabaddiIcon from "@mui/icons-material/SportsKabaddi";
 
 function App() {
   const [view, setView] = useState("Rules");
-  const { actions } = useFirebase();
 
   const [open, setOpen] = useState(false);
 
@@ -131,7 +130,7 @@ function App() {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         {view === "Combat Area" && <Typography paragraph></Typography>}
-        {view === "Rules" && <Rule ruletype={actions} />}
+        {view === "Rules" && <Rule />}
       </Box>
     </Box>
   );

@@ -18,8 +18,10 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ChangeEvent, useState } from "react";
 import { MainGrid } from "../mainGrid/mainGrid";
+import { useFirebase } from "../../api/firebaseSettings";
 
-export const Rule = ({ ruletype }: { ruletype?: Action[] }) => {
+export const Rule = () => {
+  const [ruletype] = useFirebase();
   const [filter, setFilter] = useState("");
   const [traitFilter, setTraitFilter] = useState("");
   const [ruleId, setRuleId] = useState<string>();
@@ -115,7 +117,7 @@ export const Rule = ({ ruletype }: { ruletype?: Action[] }) => {
                   <MenuItem value={""}>
                     <Typography>traits</Typography>
                   </MenuItem>
-                  {ruletype?.map((rule) =>
+                  {(ruletype as Action[])?.map((rule) =>
                     rule.traits?.map((trait, i) => (
                       <MenuItem key={i} value={trait}>
                         <Typography fontSize={12}>{trait}</Typography>
@@ -135,7 +137,7 @@ export const Rule = ({ ruletype }: { ruletype?: Action[] }) => {
           </Stack>
           <Divider />
           <MainGrid
-            rules={ruletype
+            rules={(ruletype as Action[])
               ?.map(({ id, name, category, traits }) => ({
                 id,
                 name,
