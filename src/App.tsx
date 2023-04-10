@@ -17,7 +17,6 @@ import {
 
 import { useState } from "react";
 import { Rule } from "./components/rule/rule";
-import { useFirebase } from "./api/firebaseSettings";
 import { Header } from "./components/header/header";
 
 import MuiDrawer from "@mui/material/Drawer";
@@ -25,9 +24,10 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import GavelIcon from "@mui/icons-material/Gavel";
 import SportsKabaddiIcon from "@mui/icons-material/SportsKabaddi";
+import { InitiativeList } from "./components/combat/initiativeList";
 
 function App() {
-  const [view, setView] = useState("Rules");
+  const [view, setView] = useState("Combat Area");
 
   const [open, setOpen] = useState(false);
 
@@ -129,7 +129,7 @@ function App() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        {view === "Combat Area" && <Typography paragraph></Typography>}
+        {view === "Combat Area" && <InitiativeList />}
         {view === "Rules" && <Rule />}
       </Box>
     </Box>
