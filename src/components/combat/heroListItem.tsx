@@ -6,13 +6,14 @@ import {
   Avatar,
   ListItemText,
 } from "@mui/material";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
+import { useSetRecoilState } from "recoil";
 import { HeroType, heroSelectedState, openHeroDialogState } from "./heroAtoms";
 
 type Props = { hero: HeroType };
 
 export const HeroListItem = ({ hero }: Props) => {
-  const { id, name, enemy, initiative } = hero;
+  const { id, name, enemy, initiative, next } = hero;
   const setOpenHeroDialog = useSetRecoilState(openHeroDialogState);
   const setSelectedHero = useSetRecoilState(heroSelectedState);
   const handleHeroClick = () => {
@@ -22,14 +23,15 @@ export const HeroListItem = ({ hero }: Props) => {
   return (
     <>
       <ListItem
-        sx={{ border: "1px solid background.paper", borderRadius: "8px" }}
+        sx={{
+          border: "1px solid background.paper",
+          borderRadius: "8px",
+          outline: `1px solid ${enemy ? "red" : "green"} `,
+          marginBottom: "8px",
+        }}
         key={id}
         secondaryAction={
-          <Checkbox
-            edge="end"
-            checked
-            inputProps={{ "aria-labelledby": `hero-${id}` }}
-          />
+          next && <ArrowCircleLeftIcon color="info" fontSize="large" />
         }
         disablePadding
       >

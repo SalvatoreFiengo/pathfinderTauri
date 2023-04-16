@@ -8,25 +8,33 @@ import {
 import {
   Box,
   Button,
+  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  FormControlLabel,
   TextField,
 } from "@mui/material";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export const HeroStatsDialog = () => {
   const [herolist, setHerolist] = useRecoilState(herolistState);
   const [selectedHero, setSelectedHero] = useRecoilState(heroSelectedState);
-  const [heroInfo, setHeroInfo] = useRecoilState(heroInfoState);
   const [openHeroDialog, setOpenHeroDialog] =
     useRecoilState(openHeroDialogState);
+
   const handleDialogClose = () => {
     setOpenHeroDialog(false);
   };
+
+  const [isEnemy, setIsEnemy] = useState<boolean>(
+    selectedHero?.enemy ? selectedHero.enemy : false
+  );
+
   const heroNameRef = useRef<HTMLInputElement>(null);
   const heroInitiativeRef = useRef<HTMLInputElement>(null);
+
   const handleSaveHero = () => {
     const heroName = heroNameRef.current?.value;
     const heroInitiative = heroInitiativeRef.current?.value
@@ -39,21 +47,23 @@ export const HeroStatsDialog = () => {
         name: heroName,
         initiative: heroInitiative,
         id: selectedHero.id,
+        enemy: isEnemy,
       };
       const found = newList.find(({ id }) => id === selectedHero.id);
-      if (found && hero) {
+      console.log("edit");
+      if (found) {
         newList.splice(newList.indexOf(found), 1, hero);
       }
       setSelectedHero(undefined);
     } else {
+      console.log("new");
       const newHero = {
-        ...heroInfo,
         id: herolist.length + 1,
         name: heroName,
         initiative: heroInitiative,
+        enemy: isEnemy,
       };
       newList = [...herolist, newHero];
-      setHeroInfo(undefined);
     }
     setHerolist(newList);
     handleDialogClose();
@@ -112,6 +122,15 @@ export const HeroStatsDialog = () => {
               variant="standard"
             />
           )}
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={isEnemy}
+                onChange={() => setIsEnemy(!isEnemy)}
+              />
+            }
+            label="Is enemy?"
+          />
         </Box>
       </DialogContent>
       <DialogActions>

@@ -1,10 +1,11 @@
-import { atom, atomFamily, selectorFamily, DefaultValue, useSetRecoilState, selector } from "recoil";
+import { atom } from "recoil";
 
 export type HeroType = {
   id?: number;
   name?: string;
   enemy?: boolean;
   conditions?: {condition: string; value: number;}[];
+  next?: boolean;
   initiative: number;
 };
 

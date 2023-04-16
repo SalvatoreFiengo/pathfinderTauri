@@ -1,5 +1,4 @@
 import { DataGrid, GridAlignment } from "@mui/x-data-grid";
-import { useEffect } from "react";
 import { Action } from "../../interfaces";
 
 type Props = {
